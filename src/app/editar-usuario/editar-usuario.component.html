@@ -1,0 +1,275 @@
+<h2 style="text-align: center;">UTHH-SEGUIMIENTO DE EGRESADOS/AS DE TSU vigésima octava generación (6 meses de egreso)</h2>
+
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm">
+
+ <!-- Matricula -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="matricula">Matricula</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.matricula" 
+      name="matricula" 
+      #matricula="ngModel"
+      [pattern]="patternMatricula"
+      maxlength="8">
+    
+    <!-- Mensaje de error -->
+    <div *ngIf="matricula.invalid && matricula.touched" class="text-danger">
+      La Matricula No puede llevar letras. <br>
+      La Matricula debe contener exactamente 8 números.
+    </div>
+  </div>
+</fieldset>
+
+
+<!-- Carrera -->
+<fieldset class="form-group">
+  <legend class="col-form-label">Carrera</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let carrera of carreras" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="carrera" 
+        [(ngModel)]="usuario.carrera" 
+        name="carrera" 
+        id="{{ carrera }}" 
+        required>
+      <label class="form-check-label" [for]="carrera">{{ carrera }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.carrera && usuarioForm.submitted" class="text-danger">
+    La carrera es obligatoria.
+  </div>
+</fieldset>
+
+    
+<!-- Nombre Completo -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="nombre">Nombre Completo</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.nombre" 
+      name="nombre" 
+      (ngModelChange)="convertirAMayusculas()" 
+      [ngModelOptions]="{standalone: true}"
+      #nombre="ngModel" 
+      pattern="^[a-zA-Z\s]*$">
+  </div>
+
+  <!-- Mensaje de error si contiene números -->
+  <div *ngIf="nombre.errors?.['pattern'] && nombre.touched" class="text-danger">
+    El nombre no puede contener números.
+  </div>
+</fieldset>
+
+
+
+
+   <!-- Sexo -->
+<fieldset class="form-group">
+  <legend class="col-form-label">Sexo</legend>
+  <div class="col-sm-12">
+    <div class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="'Masculino'" 
+        [(ngModel)]="usuario.sexo" 
+        name="sexo" 
+        id="masculino" 
+        required #sexo="ngModel">
+      <label class="form-check-label" for="masculino">Masculino</label>
+    </div>
+    <div class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="'Femenino'" 
+        [(ngModel)]="usuario.sexo" 
+        name="sexo" 
+        id="femenino" 
+        required #sexo="ngModel">
+      <label class="form-check-label" for="femenino">Femenino</label>
+    </div>
+    <!-- Mensaje de error si no se selecciona una opción -->
+    <div *ngIf="sexo?.invalid && sexo?.touched" class="text-danger">
+      El sexo es obligatorio.
+    </div>
+  </div>
+</fieldset>
+
+
+<!-- Telefono Personal -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="telefono_personal">Telefono Personal</label>
+    <input 
+      type="tel" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.telefono_personal" 
+      name="telefono_personal" 
+      #telefonoPersonal="ngModel" 
+      pattern="^[0-9]{10}$" 
+      maxlength="10" 
+      minlength="10">
+  </div>
+  <!-- Mensaje de error para telefono -->
+  <div *ngIf="telefonoPersonal?.invalid && telefonoPersonal?.touched" class="text-danger">
+    El teléfono debe tener exactamente 10 dígitos numéricos.
+    <br>
+    El teléfono No puede contener letras.
+  </div>
+</fieldset>
+
+
+<!-- Telefono Recados -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="telefono_recados">Telefono de Recados</label>
+    <input 
+      type="tel" 
+      class="form-control" 
+      [(ngModel)]="usuario.telefono_recados" 
+      name="telefono_recados" 
+      #telefonoRecados="ngModel" 
+      pattern="^[0-9]{10}$" 
+      maxlength="10" 
+      minlength="10">
+  </div>
+  <!-- Mensaje de error para telefono recados -->
+  <div *ngIf="telefonoRecados?.invalid && telefonoRecados?.touched" class="text-danger">
+    El teléfono de recados debe tener exactamente 10 dígitos numéricos.
+    <br>
+    El teléfono No puede contener letras.
+  </div>
+</fieldset>
+
+<!-- Correo Institucional -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="correo_institucional">Correo Institucional</label>
+    <input 
+      type="email" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.correo_institucional" 
+      name="correo_institucional" 
+      #correoInstitucional="ngModel" 
+      email>
+  </div>
+  <!-- Mensaje de error para correo institucional -->
+  <div *ngIf="correoInstitucional?.invalid && correoInstitucional?.touched" class="text-danger">
+    El correo institucional es obligatorio y debe ser válido.
+  </div>
+</fieldset>
+
+<!-- Correo Personal -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="correo_personal">Correo Personal</label>
+    <input 
+      type="email" 
+      class="form-control" 
+      [(ngModel)]="usuario.correo_personal" 
+      name="correo_personal" 
+      #correoPersonal="ngModel" 
+      email>
+  </div>
+  <!-- Mensaje de error para correo personal -->
+  <div *ngIf="correoPersonal?.invalid && correoPersonal?.touched" class="text-danger">
+    Si ingresas un correo personal, debe ser válido.
+  </div>
+</fieldset>
+
+
+
+<!-- Estatus Laboral -->
+<fieldset class="form-group">
+  <legend class="col-form-label">Estatus Laboral</legend>
+  <div class="col-sm-12">
+    <!-- Iterar sobre las opciones -->
+    <div class="form-check" *ngFor="let opcion of opcionesEstatus">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="opcion" 
+        [(ngModel)]="usuario.estatus_laboral" 
+        name="estatus_laboral" 
+        id="{{ opcion }}"
+        required>
+      <label class="form-check-label" [for]="opcion">{{ opcion }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error si no se selecciona una opción -->
+  <div *ngIf="!usuario.estatus_laboral && usuarioForm.submitted" class="text-danger">
+    El estatus laboral es obligatorio.
+  </div>
+</fieldset>
+
+
+
+
+
+
+
+
+<!-- Estudiando -->
+<fieldset class="form-group">
+  <legend class="col-form-label">¿Estás Estudiando?</legend>
+  <div class="col-sm-12">
+    <div class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="'Si'" 
+        [(ngModel)]="usuario.estudiando" 
+        name="estudiando" 
+        id="estudiando_si" 
+        required #estudiando="ngModel">
+      <label class="form-check-label" for="estudiando_si">Sí</label>
+    </div>
+    <div class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="'No'" 
+        [(ngModel)]="usuario.estudiando" 
+        name="estudiando" 
+        id="estudiando_no" 
+        required #estudiando="ngModel">
+      <label class="form-check-label" for="estudiando_no">No</label>
+    </div>
+  </div>
+  <!-- Mensaje de error para el campo estudiando -->
+  <div *ngIf="estudiando?.invalid && estudiando?.touched" class="text-danger">
+    Debes seleccionar si estás estudiando o no.
+  </div>
+</fieldset>
+
+
+
+      <!-- Submit Button -->
+      <br>
+      <fieldset class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" [disabled]="!usuarioForm.form.valid">Submit</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

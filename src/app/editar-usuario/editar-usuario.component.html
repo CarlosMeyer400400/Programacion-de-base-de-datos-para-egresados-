@@ -1,6 +1,4 @@
-<h2 style="text-align: center;">UTHH-SEGUIMIENTO DE EGRESADOS/AS DE TSU vigésima octava generación (6 meses de egreso)</h2>
-
-
+<app-header></app-header>
 
 <div class="row">
   <div class="col-sm-12">
@@ -222,12 +220,6 @@
 </fieldset>
 
 
-
-
-
-
-
-
 <!-- Estudiando -->
 <fieldset class="form-group">
   <legend class="col-form-label">¿Estás Estudiando?</legend>
@@ -260,6 +252,61 @@
     Debes seleccionar si estás estudiando o no.
   </div>
 </fieldset>
+
+
+
+
+ <!-- FORMULARIO DE NO TRABAJA -->
+
+
+
+
+   <!-- ¿TIENES CONOCIMIENTO DE QUE EXISTE UNA BOLSA DE TRABAJO DE LA UTHH? -->
+   <fieldset class="form-group">
+    <legend class="col-form-label">¿Tienes conocimiento de que existe una bolsa de trabajo de la UTHH?</legend>
+    <div class="col-sm-12">
+      <div class="form-check">
+        <input 
+          type="radio" 
+          class="form-check-input" 
+          [value]="'Si'" 
+          [(ngModel)]="usuario.conoce_bolsa_trabajo" 
+          name="conoce_bolsa_trabajo" 
+          id="si" 
+          required #conoce_bolsa_trabajo="ngModel">
+        <label class="form-check-label" for="si">Si</label>
+      </div>
+      <div class="form-check">
+        <input 
+          type="radio" 
+          class="form-check-input" 
+          [value]="'No'" 
+          [(ngModel)]="usuario.conoce_bolsa_trabajo" 
+          name="no" 
+          id="no" 
+          required #conoce_bolsa_trabajo="ngModel">
+        <label class="form-check-label" for="no">No</label>
+      </div>
+      <!-- Mensaje de error si no se selecciona una opción -->
+      <div *ngIf="conoce_bolsa_trabajo?.invalid && conoce_bolsa_trabajo?.touched" class="text-danger">
+       La pregunta es obligatorio.
+      </div>
+    </div>
+  </fieldset>
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
 
 
 

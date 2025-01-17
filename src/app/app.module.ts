@@ -9,12 +9,14 @@ import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.componen
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 
 import { UsuarioService } from './shared/usuario.service';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditarUsuarioComponent,
-    ListaUsuariosComponent
+    ListaUsuariosComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

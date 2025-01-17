@@ -11,6 +11,8 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
+  
+
   obtenerUsuarios() {
     return this.http.get<UsuarioModel[]>(this.BASE_URL+'/usuarios');
   }

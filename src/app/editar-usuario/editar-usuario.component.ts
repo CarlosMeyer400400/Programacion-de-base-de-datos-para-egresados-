@@ -43,6 +43,40 @@ export class EditarUsuarioComponent implements OnInit {
   ];
 
 
+  opciones_calidad_servicio: string [] = [
+    'MUY BIEN',
+    'BIEN',
+    'REGULAR',
+    'MAL',
+    'NO APLICA',
+  ]
+
+
+  opciones_capacitacion_postegreso: string [] = [
+    'MUY BIEN',
+    'BIEN',
+    'REGULAR',
+    'MAL',
+    'NO APLICA',
+  ]
+
+
+  opciones_medio_colocacion: string [] = [
+    'ESTADÍA',
+    'BOLSA DE TRABAJO DE LA UTHH',
+    'CUENTA PROPIA',
+    'RECOMENDACIÓN DE AMIGO/A O FAMILIAR',
+    'AUTOEMPLEO',
+  ]
+
+  opciones_localidad_empleo: string [] = [
+    'ZONA DE INFLUENCIA (Atlapexco, Axtla de Terrazas, Benito Juárez, Calnalí, Chalma, Chapulhuacan, Chiconamel, Huautla, Huejutla, Huazalingo, Jaltocán, Platón Sánchez,  San Felipe Orizatlan, Tantoyuca, Tamazunchale,  Tlanchinol, Tepehuacan, Yahualica, Xochiatipan)',
+    'INTERIOR DEL ESTADO',
+    'FUERA DEL ESTADO',
+    'EXTRANJERO',
+  ]
+
+
 
   constructor(
     private usuarioService: UsuarioService,

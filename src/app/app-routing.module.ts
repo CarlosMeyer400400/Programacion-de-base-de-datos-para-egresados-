@@ -5,9 +5,9 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 
 const routes: Routes = [
   { path:'usuarios', component: ListaUsuariosComponent },
+  { path:'usuarios/formulario', component: EditarUsuarioComponent },
   { path:'usuarios/editar/:id', component: EditarUsuarioComponent },
-  { path:'usuarios/agregar', component: EditarUsuarioComponent },
-  { path:'**', redirectTo:'/usuarios', pathMatch:'full' }
+  { path:'**', redirectTo:'/usuarios/formulario', pathMatch:'full' }
 ];
 
 @NgModule({

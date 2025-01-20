@@ -4,6 +4,14 @@
   <div class="col-sm-12">
     <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm">
 
+       <!-- FORMULARIO DE INFORMACION GENERAL -->
+
+       <div class="formulario-no-trabaja">
+        <div class="titulo-esquina">
+          DATOS GENERALES
+        </div>
+
+
  <!-- Matricula -->
 <fieldset class="form-group">
   <div class="col-sm-12">
@@ -68,6 +76,10 @@
   </div>
 
   <!-- Mensaje de error si contiene números -->
+  <div *ngIf="nombre?.invalid && nombre?.touched" class="text-danger">
+    El Nombre obligatorio.
+  </div>
+
   <div *ngIf="nombre.errors?.['pattern'] && nombre.touched" class="text-danger">
     El nombre no puede contener números.
   </div>
@@ -253,50 +265,252 @@
   </div>
 </fieldset>
 
+</div>
+
+       <!-- TERMINA FORMULARIO DE INFORMACION GENERAL -->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
  <!-- FORMULARIO DE NO TRABAJA -->
 
+ <div class="formulario-no-trabaja">
+  <div class="titulo-esquina">
+    FORMULARIO NO TRABAJA
+  </div>
 
 
-
-   <!-- ¿TIENES CONOCIMIENTO DE QUE EXISTE UNA BOLSA DE TRABAJO DE LA UTHH? -->
-   <fieldset class="form-group">
-    <legend class="col-form-label">¿Tienes conocimiento de que existe una bolsa de trabajo de la UTHH?</legend>
-    <div class="col-sm-12">
-      <div class="form-check">
-        <input 
-          type="radio" 
-          class="form-check-input" 
-          [value]="'Si'" 
-          [(ngModel)]="usuario.conoce_bolsa_trabajo" 
-          name="conoce_bolsa_trabajo" 
-          id="si" 
-          required #conoce_bolsa_trabajo="ngModel">
-        <label class="form-check-label" for="si">Si</label>
-      </div>
-      <div class="form-check">
-        <input 
-          type="radio" 
-          class="form-check-input" 
-          [value]="'No'" 
-          [(ngModel)]="usuario.conoce_bolsa_trabajo" 
-          name="no" 
-          id="no" 
-          required #conoce_bolsa_trabajo="ngModel">
-        <label class="form-check-label" for="no">No</label>
-      </div>
-      <!-- Mensaje de error si no se selecciona una opción -->
-      <div *ngIf="conoce_bolsa_trabajo?.invalid && conoce_bolsa_trabajo?.touched" class="text-danger">
-       La pregunta es obligatorio.
-      </div>
+  <!-- ¿TIENES CONOCIMIENTO DE QUE EXISTE UNA BOLSA DE TRABAJO DE LA UTHH? -->
+<fieldset class="form-group">
+  <legend class="col-form-label">¿Tienes conocimiento de que existe una bolsa de trabajo de la UTHH?</legend>
+  <div class="col-sm-12">
+    <div class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="'Si'" 
+        [(ngModel)]="usuario.conoce_bolsa_trabajo" 
+        name="conoce_bolsa_trabajo" 
+        id="conoce_bolsa_si" 
+        required #conoce_bolsa_trabajo="ngModel">
+      <label class="form-check-label" for="conoce_bolsa_si">Si</label>
     </div>
-  </fieldset>
+    <div class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="'No'" 
+        [(ngModel)]="usuario.conoce_bolsa_trabajo" 
+        name="conoce_bolsa_trabajo" 
+        id="conoce_bolsa_no" 
+        required>
+      <label class="form-check-label" for="conoce_bolsa_no">No</label>
+    </div>
+    <div *ngIf="conoce_bolsa_trabajo?.invalid && conoce_bolsa_trabajo?.touched" class="text-danger">
+      La pregunta es obligatorio.
+    </div>
+  </div>
+</fieldset>
+
+<!-- ¿HAS UTILIZADO LA BOLSA DE TRABAJO DE LA UTHH? -->
+<fieldset class="form-group">
+  <legend class="col-form-label">¿Has utilizado la bolsa de trabajo de la UTHH?</legend>
+  <div class="col-sm-12">
+    <div class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="'Si'" 
+        [(ngModel)]="usuario.utiliza_bolsa_trabajo" 
+        name="utiliza_bolsa_trabajo" 
+        id="utiliza_bolsa_si" 
+        required #utiliza_bolsa_trabajo="ngModel">
+      <label class="form-check-label" for="utiliza_bolsa_si">Si</label>
+    </div>
+    <div class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="'No'" 
+        [(ngModel)]="usuario.utiliza_bolsa_trabajo" 
+        name="utiliza_bolsa_trabajo" 
+        id="utiliza_bolsa_no" 
+        required>
+      <label class="form-check-label" for="utiliza_bolsa_no">No</label>
+    </div>
+    <div *ngIf="utiliza_bolsa_trabajo?.invalid && utiliza_bolsa_trabajo?.touched" class="text-danger">
+      La pregunta es obligatorio.
+    </div>
+  </div>
+</fieldset>
+
+<!-- EN CASO DE HABER UTILIZADO LA BOLSA DE 
+ TRABAJO DE LA UTHH ¿CÓMO CONSIDERAS EL SERVICIO PRESTADO? -->
+<fieldset class="form-group">
+  <legend class="col-form-label">EN CASO DE HABER UTILIZADO LA BOLSA DE TRABAJO DE LA UTHH ¿CÓMO CONSIDERAS EL SERVICIO PRESTADO?</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let opciones_calidad_servicio of opciones_calidad_servicio" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="opciones_calidad_servicio" 
+        [(ngModel)]="usuario.calidad_servicio" 
+        name="calidad_servicio" 
+        id="{{ opciones_calidad_servicio }}" 
+        required>
+      <label class="form-check-label" [for]="opciones_calidad_servicio">{{ opciones_calidad_servicio }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.calidad_servicio && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+<!--¿CÓMO  CONSIDERAS QUE TE HAS CAPACITADO  DESPUÉS DE QUE 
+EGRESASTE, CON LA FINALIDAD DE ACTUALIZAR TUS CONOCIMIENTOS, 
+HABILIDADES Y DESTREZAS, CONSIDERANDO LAS INNOVACIONES TECNOLÓGICAS 
+Y NECESIDADES DEL CONTEXTO DE TÚ ESPECIALIDAD? -->
+ <fieldset class="form-group">
+  <legend class="col-form-label">¿CÓMO  CONSIDERAS QUE TE HAS CAPACITADO  
+    DESPUÉS DE QUE EGRESASTE, CON LA FINALIDAD DE ACTUALIZAR TUS 
+    CONOCIMIENTOS, HABILIDADES Y DESTREZAS, CONSIDERANDO LAS INNOVACIONES 
+    TECNOLÓGICAS Y NECESIDADES DEL CONTEXTO DE TÚ ESPECIALIDAD?</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let opciones_capacitacion_postegreso of opciones_capacitacion_postegreso" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="opciones_capacitacion_postegreso" 
+        [(ngModel)]="usuario.capacitacion_postegreso" 
+        name="capacitacion_postegreso" 
+        id="{{ opciones_capacitacion_postegreso }}" 
+        required>
+      <label class="form-check-label" [for]="opciones_capacitacion_postegreso">{{ opciones_capacitacion_postegreso }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.capacitacion_postegreso && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+<!-- ¿QUE SUGERENCIA LE HARÍAS AL PERSONAL DIRECTIVO Y DOCENTE DEL PROGRAMA EDUCATIVO PARA 
+ MEJORAR LA CALIDAD DE FORMACIÓN Y TENER MAYOR ÉXITO EN EL EJERCICIO PROFESIONAL? -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="sugerencias">¿QUE SUGERENCIA LE HARÍAS AL PERSONAL DIRECTIVO Y DOCENTE DEL PROGRAMA EDUCATIVO PARA MEJORAR LA CALIDAD DE FORMACIÓN Y TENER MAYOR ÉXITO EN EL EJERCICIO PROFESIONAL?</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.sugerencias" 
+      name="sugerencias" 
+      (ngModelChange)="convertirAMayusculas()" 
+      [ngModelOptions]="{standalone: true}"
+      #nombre="ngModel" 
+      pattern="^[a-zA-Z\s\1-9]*$">
+  </div>
+</fieldset>
+
+
+</div>
+   <!-- TERMINA FORMULARIO DE NO TRABAJA -->
+
+ 
 
 
 
 
+
+
+
+
+
+
+
+
+      <!-- FORMULARIO DE SI TRABAJA -->
+      <div class="formulario-no-trabaja">
+        <div class="titulo-esquina">
+          FORMULARIO SI TRABAJA
+        </div>
+
+<!-- MEDIO POR EL CUAL TE COLOCASTE EN TU TRABAJO
+ -->
+ <fieldset class="form-group">
+  <legend class="col-form-label">MEDIO POR EL CUAL TE COLOCASTE EN TU TRABAJO</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let  opciones_medio_colocacion of  opciones_medio_colocacion" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]=" opciones_medio_colocacion" 
+        [(ngModel)]="usuario.medio_colocacion" 
+        name=" medio_colocacion" 
+        id="{{  opciones_medio_colocacion }}" 
+        required>
+      <label class="form-check-label" [for]=" opciones_medio_colocacion">{{  opciones_medio_colocacion }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.medio_colocacion && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+
+<!-- LOCALIDAD DEL EMPLEO -->
+ <fieldset class="form-group">
+  <legend class="col-form-label">LOCALIDAD DEL EMPLEO</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let  opciones_localidad_empleo of opciones_localidad_empleo" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]=" opciones_localidad_empleo" 
+        [(ngModel)]="usuario.localidad_empleo" 
+        name=" localidad_empleo" 
+        id="{{  opciones_localidad_empleo}}" 
+        required>
+      <label class="form-check-label" [for]=" opciones_localidad_empleo">{{  opciones_localidad_empleo }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.localidad_empleo && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+
+
+
+
+
+
+
+</div>
+
+      <!-- TERMINA FORMULARIO DE SI TRABAJA -->
 
 
   

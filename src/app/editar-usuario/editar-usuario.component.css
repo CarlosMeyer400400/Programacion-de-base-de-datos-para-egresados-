@@ -5,3 +5,26 @@
 .ng-invalid:not(form) {
   border-left: 5px solid #A94442;
 }
+
+
+/* Estilo del contenedor con marco negro */
+.formulario-no-trabaja {
+  border: 2px solid black; /* Marco negro */
+  padding: 20px;          /* Espaciado interno */
+  position: relative;     /* Posicionamiento relativo para ubicar el texto en la esquina */
+  margin: 20px 0;         /* Separación con otros elementos */
+}
+
+/* Estilo del cuadro rojo en la esquina superior derecha */
+.titulo-esquina {
+  position: absolute;     /* Posicionamiento absoluto dentro del contenedor */
+  top: -10px;             /* Ajuste vertical */
+  right: -10px;           /* Ajuste horizontal */
+  background-color: red;  /* Fondo rojo */
+  color: white;           /* Texto blanco */
+  padding: 5px 10px;      /* Espaciado interno */
+  font-weight: bold;      /* Texto en negrita */
+  border-radius: 5px;     /* Bordes redondeados */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para un mejor diseño */
+  font-size: 14px;        /* Tamaño de texto */
+}

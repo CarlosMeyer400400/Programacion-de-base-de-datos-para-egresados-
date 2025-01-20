@@ -76,6 +76,21 @@ export class EditarUsuarioComponent implements OnInit {
     'EXTRANJERO',
   ]
 
+  
+  opciones_tiempo_colocacion: string [] = [
+    'ESTADÍA',
+    '1 A 3 MESES',
+    '4 A 6 MESES',
+  ]
+
+  opciones_tipo_organizacion: string [] = [
+    'PRIVADA',
+    'PÚBLICA',
+    'PROPIA',
+  ]
+
+
+
 
 
   constructor(

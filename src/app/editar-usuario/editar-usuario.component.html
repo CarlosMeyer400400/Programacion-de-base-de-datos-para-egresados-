@@ -501,6 +501,71 @@ Y NECESIDADES DEL CONTEXTO DE TÚ ESPECIALIDAD? -->
 </fieldset>
 
 
+<!-- DOMICILIO DE LA EMPRESA (CALLE, COLONIA, NUMERO, MUNICIPIO, ESTADO) -->
+ <fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="domicilio_empresa">DOMICILIO DE LA EMPRESA (CALLE, COLONIA, NUMERO, MUNICIPIO, ESTADO)    </label>
+    <input 
+      type="text" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.domicilio_empresa" 
+      name="sugerencias" 
+      (ngModelChange)="convertirAMayusculas()" 
+      [ngModelOptions]="{standalone: true}"
+      #nombre="ngModel" 
+      pattern="^[a-zA-Z\s\1-9]*$">
+  </div>
+</fieldset>
+
+
+<!-- TIEMPO DE COLOCACIÓN -->
+<fieldset class="form-group">
+  <legend class="col-form-label">TIEMPO DE COLOCACIÓN</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let  opciones_tiempo_colocacion of opciones_tiempo_colocacion" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]=" opciones_tiempo_colocacion" 
+        [(ngModel)]="usuario.tiempo_colocacion" 
+        name="tiempo_colocacion" 
+        id="{{opciones_tiempo_colocacion}}" 
+        required>
+      <label class="form-check-label" [for]=" opciones_tiempo_colocacion">{{  opciones_tiempo_colocacion }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.tiempo_colocacion && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+<!-- TIPO DE ORGANIZACIÓN -->
+<fieldset class="form-group">
+  <legend class="col-form-label">TIPO DE ORGANIZACIÓN</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let  opciones_tipo_organizacion of opciones_tipo_organizacion" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]=" opciones_tipo_organizacion" 
+        [(ngModel)]="usuario.tipo_organizacion" 
+        name="tipo_organizacion" 
+        id="{{opciones_tipo_organizacion}}" 
+        required>
+      <label class="form-check-label" [for]=" opciones_tipo_organizacion">{{  opciones_tipo_organizacion }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.tipo_organizacion && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
 
 
 

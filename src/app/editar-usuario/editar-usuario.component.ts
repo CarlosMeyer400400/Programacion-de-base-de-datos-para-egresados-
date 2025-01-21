@@ -89,6 +89,68 @@ export class EditarUsuarioComponent implements OnInit {
     'PROPIA',
   ]
 
+  opciones_tamano_organizacion: string [] = [
+    'MICRO (DE 1 A 10 PERSONAS)',
+    'PEQUEÑA (DE 11 A 50 PERSONAS)',
+    'MEDIANA (DE 51 A 100 PERSONAS)',
+    'MACRO (+ DE 200 PERSONAS)',
+  ]
+
+  opciones_giro_empresa: string[] = [
+    "GIRO DE LA EMPRESA",
+    "AGRICULTURA",
+    "GANADERÍA",
+    "COMERCIO",
+    "EDUCACIÓN",
+    "SERVICIOS",
+    "SERVICIOS PÚBLICOS",
+    "TIC",
+    "TRANSFORMACIÓN/MANUFACTURERA",
+    "CONSTRUCCIÓN"
+  ];
+
+  opciones_sueldo_mensual: string[] = [
+    "DE $2,000 HASTA $10,372.20",
+    "DE $10,372.30 HASTA $20,744.40",
+    "DE $20,744.50 HASTA $31,116.60",
+    "DE $31,116.70 HASTA $41,488.80",
+    "DE $41,488.90 HASTA $51,861.00",
+    "MÁS DE $51,862.00"
+  ];
+
+  opciones_tiene_prestaciones: string[] = [
+    "SI",
+    "NO",
+  ];
+  
+  opciones_ocupacion: string[] = [
+    "OPERARIO",
+    "TÉCNICO GENERAL",
+    "TÉCNICO ESPECIALIZADO",
+    "ADMINISTRATIVO/A",
+    "SUPERVISOR/A",
+    "GERENTE",
+    "DIRECTOR/A",
+    "AUTOEMPLEO",
+    "OTRA"
+  ];
+
+  opciones_trabaja_perfil_egreso: string[] = [
+    "SI",
+    "NO",
+  ];
+
+  opciones_numero_trabajos: string[] = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "MÁS DE 5",
+  ];
+  
+  
+
+
 
 
 

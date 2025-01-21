@@ -86,8 +86,6 @@
 </fieldset>
 
 
-
-
    <!-- Sexo -->
 <fieldset class="form-group">
   <legend class="col-form-label">Sexo</legend>
@@ -168,6 +166,7 @@
   </div>
 </fieldset>
 
+
 <!-- Correo Institucional -->
 <fieldset class="form-group">
   <div class="col-sm-12">
@@ -187,6 +186,7 @@
   </div>
 </fieldset>
 
+
 <!-- Correo Personal -->
 <fieldset class="form-group">
   <div class="col-sm-12">
@@ -204,7 +204,6 @@
     Si ingresas un correo personal, debe ser válido.
   </div>
 </fieldset>
-
 
 
 <!-- Estatus Laboral -->
@@ -444,15 +443,13 @@ Y NECESIDADES DEL CONTEXTO DE TÚ ESPECIALIDAD? -->
 
 
 
-
       <!-- FORMULARIO DE SI TRABAJA -->
       <div class="formulario-no-trabaja">
         <div class="titulo-esquina">
           FORMULARIO SI TRABAJA
         </div>
 
-<!-- MEDIO POR EL CUAL TE COLOCASTE EN TU TRABAJO
- -->
+<!-- MEDIO POR EL CUAL TE COLOCASTE EN TU TRABAJO-->
  <fieldset class="form-group">
   <legend class="col-form-label">MEDIO POR EL CUAL TE COLOCASTE EN TU TRABAJO</legend>
   <div class="col-sm-12">
@@ -567,6 +564,266 @@ Y NECESIDADES DEL CONTEXTO DE TÚ ESPECIALIDAD? -->
 </fieldset>
 
 
+<!-- TAMAÑO DE ORGANIZACIÓN -->
+<fieldset class="form-group">
+  <legend class="col-form-label">TAMAÑO DE ORGANIZACIÓN</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let opciones_tamano_organizacion of opciones_tamano_organizacion" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="opciones_tamano_organizacion" 
+        [(ngModel)]="usuario.tamano_organizacion" 
+        name="tamano_organizacion" 
+        id="{{opciones_tamano_organizacion}}" 
+        required>
+        <label class="form-check-label" [for]=" opciones_tamano_organizacion">{{  opciones_tamano_organizacion }}</label>
+      </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.tamano_organizacion && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+<!-- NOMBRE DE LA EMPRESA -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="nombre_empresa">NOMBRE DE LA EMPRESA</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.nombre_empresa" 
+      name="sugerencias" 
+      (ngModelChange)="convertirAMayusculas()" 
+      [ngModelOptions]="{standalone: true}"
+      #nombre="ngModel" 
+      pattern="^[a-zA-Z\s\1-9]*$">
+  </div>
+</fieldset>
+
+
+
+<!-- GIRO DE LA EMPRESA -->
+<fieldset class="form-group">
+  <legend class="col-form-label">GIRO DE LA EMPRESA</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let opciones_giro_empresa of opciones_giro_empresa" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="opciones_giro_empresa" 
+        [(ngModel)]="usuario.giro_empresa" 
+        name="giro_empresa" 
+        id="{{opciones_giro_empresa}}" 
+        required>
+        <label class="form-check-label" [for]=" opciones_giro_empresa">{{opciones_giro_empresa }}</label>
+      </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.giro_empresa && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+<!-- SUELDO MENSUAL -->
+<fieldset class="form-group">
+  <legend class="col-form-label">SUELDO MENSUAL</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let opciones_sueldo_mensual of opciones_sueldo_mensual" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="opciones_sueldo_mensual" 
+        [(ngModel)]="usuario.sueldo_mensual" 
+        name="sueldo_mensual" 
+        id="{{opciones_sueldo_mensual}}" 
+        required>
+        <label class="form-check-label" [for]=" opciones_sueldo_mensual">{{opciones_sueldo_mensual}}</label>
+      </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.sueldo_mensual && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+<!-- TIENES PRESTACIONES -->
+<fieldset class="form-group">
+  <legend class="col-form-label">TIENES PRESTACIONES</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let opciones_tiene_prestaciones of opciones_tiene_prestaciones" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="opciones_tiene_prestaciones" 
+        [(ngModel)]="usuario.tiene_prestaciones" 
+        name="tiene_prestaciones" 
+        id="{{opciones_tiene_prestaciones}}" 
+        required>
+        <label class="form-check-label" [for]=" opciones_tiene_prestaciones">{{opciones_tiene_prestaciones}}</label>
+      </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.tiene_prestaciones && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+<!-- OCUPACIÓN -->
+<fieldset class="form-group">
+  <legend class="col-form-label">OCUPACIÓN</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let ocupacion of opciones_ocupacion" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="ocupacion" 
+        [(ngModel)]="usuario.ocupacion" 
+        name="ocupacion" 
+        id="ocupacion_{{ocupacion}}" 
+        required>
+      <label class="form-check-label" [for]="'ocupacion_' + ocupacion">{{ ocupacion }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.ocupacion && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+<!-- EN CASO DE ELEGIR LA RESPUESTA OTRA EN LA PREGUNTA ANTERIOR, 
+ MENCIONA CUAL ES TU PUESTO ACTUAL-->
+ <fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="puesto_actual">EN CASO DE ELEGIR LA RESPUESTA OTRA EN LA PREGUNTA ANTERIOR, 
+      MENCIONA CUAL ES TU PUESTO ACTUAL</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.puesto_actual" 
+      name="puesto_actual" 
+      (ngModelChange)="convertirAMayusculas()" 
+      [ngModelOptions]="{standalone: true}"
+      #puesto_actual="ngModel" 
+      pattern="^[a-zA-Z\s\1-9]*$">
+  </div>
+</fieldset>
+
+
+
+<!-- TRABAJAS DENTRO DE TU PERFIL DE EGRESO -->
+<fieldset class="form-group">
+  <legend class="col-form-label">TRABAJAS DENTRO DE TU PERFIL DE EGRESO</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let trabaja_perfil_egreso of opciones_trabaja_perfil_egreso" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="trabaja_perfil_egreso" 
+        [(ngModel)]="usuario.trabaja_perfil_egreso" 
+        name="trabaja_perfil_egreso" 
+        id="trabaja_perfil_egreso_{{trabaja_perfil_egreso}}" 
+        required>
+      <label class="form-check-label" [for]="'trabaja_perfil_egreso_' + trabaja_perfil_egreso">{{ trabaja_perfil_egreso }}</label>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.trabaja_perfil_egreso && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
+
+
+
+<!--NOMBRE Y PUESTO DE TU JEFE/A INMEDIATO/A-->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="nombre_jefe">NOMBRE Y PUESTO DE TU JEFE/A INMEDIATO/A</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.nombre_jefe" 
+      name="nombre_jefe" 
+      (ngModelChange)="convertirAMayusculas()" 
+      [ngModelOptions]="{standalone: true}"
+      #nombre_jefe="ngModel" 
+      pattern="^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]*$">
+  </div>
+
+  <!-- Mensaje de error si el campo es inválido -->
+  <div *ngIf="nombre_jefe?.invalid && nombre_jefe?.touched" class="text-danger">
+    El Nombre es obligatorio.
+  </div>
+
+  <!-- Mensaje de error por caracteres inválidos -->
+  <div *ngIf="nombre_jefe.errors?.['pattern'] && nombre_jefe?.touched" class="text-danger">
+    El nombre no puede contener números ni caracteres especiales.
+  </div>
+</fieldset>
+
+
+<!-- NÚMERO TELEFÓNICO DE OFICINA O NÚMERO DE JEFE/A INMEDIATO/A -->
+<fieldset class="form-group">
+  <div class="col-sm-12">
+    <label class="control-label" for="telefono_jefe">NÚMERO TELEFÓNICO DE OFICINA O NÚMERO DE JEFE/A INMEDIATO/A</label>
+    <input 
+      type="tel" 
+      class="form-control" 
+      required 
+      [(ngModel)]="usuario.telefono_jefe" 
+      name="telefono_jefe" 
+      #telefonoJefe="ngModel" 
+      pattern="^[0-9]{10}$" 
+      maxlength="10" 
+      minlength="10">
+  </div>
+  <!-- Mensaje de error para telefono -->
+  <div *ngIf="telefonoJefe?.invalid && telefonoJefe?.touched" class="text-danger">
+    El teléfono debe tener exactamente 10 dígitos numéricos.
+    <br>
+    El teléfono No puede contener letras.
+  </div>
+</fieldset>
+
+
+
+<!-- NUMERO DE TRABAJOS DESPUÉS DEL EGRESO -->
+<fieldset class="form-group">
+  <legend class="col-form-label">NUMERO DE TRABAJOS DESPUÉS DEL EGRESO</legend>
+  <div class="col-sm-12">
+    <div *ngFor="let opciones_numero_trabajos of opciones_numero_trabajos" class="form-check">
+      <input 
+        type="radio" 
+        class="form-check-input" 
+        [value]="opciones_numero_trabajos" 
+        [(ngModel)]="usuario.numero_trabajos" 
+        name="numero_trabajos" 
+        id="{{opciones_numero_trabajos}}" 
+        required>
+        <label class="form-check-label" [for]=" opciones_numero_trabajos">{{opciones_numero_trabajos}}</label>
+      </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="!usuario.numero_trabajos && usuarioForm.submitted" class="text-danger">
+    La pregunta es obligatoria.
+  </div>
+</fieldset>
 
 
 
@@ -591,9 +848,9 @@ Y NECESIDADES DEL CONTEXTO DE TÚ ESPECIALIDAD? -->
 
       <!-- Submit Button -->
       <br>
-      <fieldset class="form-group">
+      <fieldset class="form-group" >
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" [disabled]="!usuarioForm.form.valid">Submit</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!usuarioForm.form.valid">Enviar</button>
         </div>
       </fieldset>
     </form>
